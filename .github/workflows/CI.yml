@@ -28,11 +28,11 @@ jobs:
       # Setup Python
       - name: Install Python
         run: uv python install 3.12
-        
+
       # Setup Dependencies
       - name: Install the dependencies
         run: uv sync
-        
+
       # Pre-Commit Checks
       - name: Run pre-commit checks
         run: |

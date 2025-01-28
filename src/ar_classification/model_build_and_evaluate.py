@@ -8,18 +8,18 @@ from sklearn.preprocessing import StandardScaler
 
 
 def train_and_evaluate_model(X_train, X_test, y_train, y_test):
-
     tscv = TimeSeriesSplit()
 
-    pipeline1 = make_pipeline(StandardScaler(), LogisticRegression(class_weight = "balanced", random_state=0))
+    pipeline1 = make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", random_state=0))
 
     param_grid1 = {
-        'standardscaler__with_mean' : [True, False],
-        'logisticregression__C' : [0.1, 0.5, 1],
+        "standardscaler__with_mean": [True, False],
+        "logisticregression__C": [0.1, 0.5, 1],
     }
 
-    search1 = GridSearchCV(pipeline1, param_grid1, cv=tscv, n_jobs=5, scoring='f1_micro', return_train_score=True, 
-                           verbose=3)
+    search1 = GridSearchCV(
+        pipeline1, param_grid1, cv=tscv, n_jobs=5, scoring="f1_micro", return_train_score=True, verbose=3
+    )
 
     search1 = search1.fit(X_train, y_train)
 
@@ -30,12 +30,13 @@ def train_and_evaluate_model(X_train, X_test, y_train, y_test):
     print("\nConfusion Matrix:")
     unique_label = np.unique([y_test, y_pred])
     cm = pd.DataFrame(
-    confusion_matrix(y_test, y_pred, labels=unique_label), 
-    index=['true:{:}'.format(x) for x in unique_label], 
-    columns=['pred:{:}'.format(x) for x in unique_label])
+        confusion_matrix(y_test, y_pred, labels=unique_label),
+        index=["true:{:}".format(x) for x in unique_label],
+        columns=["pred:{:}".format(x) for x in unique_label],
+    )
     print(cm)
 
     print("\nClassification Report:")
-    print(classification_report(y_test, y_pred)) 
+    print(classification_report(y_test, y_pred))
 
     return search1
