@@ -21,7 +21,9 @@ jobs:
 
       # Setup uv
       - name: Install uv
-        run: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: 0.5.24
 
       # Setup Python
       - name: Install Python
