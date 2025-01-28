@@ -3,7 +3,7 @@ name = "finance-ml-model"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12, <3.13"
+requires-python = "==3.12"
 dependencies = ["cfgv==3.4.0",
                 "distlib==0.3.9",
                 "filelock==3.17.0",
