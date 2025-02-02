@@ -1,7 +1,7 @@
 [project]
-name = "finance-ml-model"
+name = "ar-classification"
 version = "0.1.0"
-description = "Add your description here"
+description = "Finance Classification Model"
 readme = "README.md"
 requires-python = "==3.12.7"
 dependencies = ["cfgv==3.4.0",
