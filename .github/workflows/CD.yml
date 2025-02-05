@@ -39,7 +39,7 @@ jobs:
         run: |
             az storage blob upload \
             --container-name custom-package \
-            --file car_classification-0.1.0-py3-none-any.whl \
+            --file ar_classification-0.1.0-py3-none-any.whl \
             --name ar_classification-0.1.0-py3-none-any.whl \
             --account-name mmadata \
             --account-key ${{ secrets.AZURE_STORAGE_KEY }}
