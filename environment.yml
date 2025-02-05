@@ -1,0 +1,10 @@
+name: ml-env
+dependencies:
+  - python=3.12
+  - scikit-learn
+  - numpy
+  - pip
+  - pip:
+      - azureml-defaults
+      - joblib
+      - https://mmadata.blob.core.windows.net/custom-package/ar_classification-0.1.0-py3-none-any.whl

@@ -174,4 +174,7 @@ cython_debug/
 .vscode
 
 # Data files
-data/
+# data/
+
+# Model files
+model/
