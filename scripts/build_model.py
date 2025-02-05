@@ -1,7 +1,8 @@
 from src.ar_classification import data_load_and_process, generate_feature, model_build_and_evaluate, split_data
 
 
-def main():
+def build_model():
+
     print("Hello from finance-ml-model!")
 
     df = data_load_and_process.load_data("data/AR-dataset.csv")
@@ -19,5 +20,4 @@ def main():
     print(model1.best_params_)
 
 
-if __name__ == "__main__":
-    main()
+build_model()

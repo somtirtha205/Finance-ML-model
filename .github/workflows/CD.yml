@@ -1,0 +1,53 @@
+name: Deploy ML Model to Azure ML Studio
+
+on:
+  pull_request:
+    branches:
+      - main  # Trigger on push to main branch
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+    # Setup uv
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: 0.5.24
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Authenticate to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Load Data
+        run: |
+            az storage blob upload \
+            --container-name custom-package \
+            --file car_classification-0.1.0-py3-none-any.whl \
+            --name ar_classification-0.1.0-py3-none-any.whl \
+            --account-name mmadata 
+
+      - name: Register Model in Azure ML
+        run: |
+            python scripts/build_model.py
+
+      - name: Register Model in Azure ML
+        run: |
+            python scripts/register_model.py
+  
+      - name: Deploy Model to Azure ML Endpoint
+        run: |
+            python scripts/deploy_model.py
