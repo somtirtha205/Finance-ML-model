@@ -1,6 +1,6 @@
 from azureml.core import Model, Workspace
 
-ws = Workspace.from_config(file_name="ws_config.json")
+ws = Workspace.get(name="WorkspaceML", resource_group="ResourceGroupML")
 
 model = Model.register(workspace=ws, model_name="AR_model", model_path="./model/ar.pkl", description="Finance ML model")
 
