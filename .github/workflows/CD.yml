@@ -35,15 +35,6 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Load Data
-        run: |
-            az storage blob upload \
-            --container-name custom-package \
-            --file ./dist/ar_classification-0.1.0-py3-none-any.whl \
-            --name ar_classification-0.1.0-py3-none-any.whl \
-            --account-name mmadata \
-            --account-key ${{ secrets.AZURE_STORAGE_KEY }}
-
       - name: Register Model in Azure ML
         run: |
             python scripts/build_model.py
