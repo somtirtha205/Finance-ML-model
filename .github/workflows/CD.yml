@@ -28,7 +28,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: uv sync
+        run: uv pip install -r pyproject.toml --all-extras
 
       - name: Authenticate to Azure
         uses: azure/login@v2
