@@ -4,7 +4,10 @@ on:
   pull_request:
     branches:
       - main  # Trigger on push to main branch
-  workflow_dispatch:  # Allow manual trigger
+  workflow_run:
+    workflows: ["Continuous Integration"]  # Ensure this matches the CI workflow name
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -38,7 +41,8 @@ jobs:
             --container-name custom-package \
             --file car_classification-0.1.0-py3-none-any.whl \
             --name ar_classification-0.1.0-py3-none-any.whl \
-            --account-name mmadata
+            --account-name mmadata \
+            --account-key ${{ secrets.AZURE_STORAGE_KEY }}
 
       - name: Register Model in Azure ML
         run: |
