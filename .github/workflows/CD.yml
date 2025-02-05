@@ -4,10 +4,7 @@ on:
   pull_request:
     branches:
       - main  # Trigger on push to main branch
-  workflow_run:
-    workflows: ["Continuous Integration"]  # Ensure this matches the CI workflow name
-    types:
-      - completed
+  workflow_dispatch:  # Allow manual trigger
 
 jobs:
   deploy:
