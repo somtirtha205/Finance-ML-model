@@ -9,7 +9,10 @@ sp_id = os.getenv("AZURE_SP_ID")
 sp_secret = os.getenv("AZURE_SP_SECRET")
 
 sp = ServicePrincipalAuthentication(
-    tenant_id=tenant_id, service_principal_id=sp_id, service_principal_password=sp_secret
+    tenant_id=tenant_id,
+    service_principal_id=sp_id,
+    subscription_id=subscription_id,
+    service_principal_password=sp_secret,
 )
 
 ws = Workspace.get(name="WorkspaceML", resource_group="ResourceGroupML", auth=sp)
