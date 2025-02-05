@@ -2,7 +2,7 @@ from azureml.core import Environment, Model, Workspace
 from azureml.core.model import InferenceConfig
 from azureml.core.webservice import AciWebservice
 
-ws = Workspace.from_config()
+ws = Workspace.from_config(file_name="ws_config.json")
 
 # Get the registered model
 model = Model(ws, name="AR_model")
