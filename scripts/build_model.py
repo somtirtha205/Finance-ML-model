@@ -1,10 +1,4 @@
-from azureml.core import Environment, Workspace
-
 from ar_classification import data_load_and_process, generate_feature, model_build_and_evaluate, split_data
-
-ws = Workspace.from_config()
-
-env = Environment.from_conda_specification(name="ml-env", file_path="environment.yml")
 
 
 def build_model():
