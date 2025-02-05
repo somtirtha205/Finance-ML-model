@@ -7,12 +7,14 @@ from azureml.core.model import Model
 # Global variable to store the model
 model = None
 
+
 def init():
     """Initialize the model by loading it into memory."""
     global model
     model_path = Model.get_model_path("AR_model")  # Ensure this matches your model name
     model = joblib.load(model_path)
     print("Model loaded successfully!")
+
 
 def run(data):
     """Run the model on the input data."""

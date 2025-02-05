@@ -2,7 +2,6 @@ from src.ar_classification import data_load_and_process, generate_feature, model
 
 
 def build_model():
-
     print("Hello from finance-ml-model!")
 
     df = data_load_and_process.load_data("data/AR-dataset.csv")

@@ -22,7 +22,7 @@ service = Model.deploy(
     name="fin-ml-service",
     models=[model],
     inference_config=inference_config,
-    deployment_config=deployment_config
+    deployment_config=deployment_config,
 )
 
 service.wait_for_deployment(show_output=True)

@@ -38,7 +38,7 @@ jobs:
             --container-name custom-package \
             --file car_classification-0.1.0-py3-none-any.whl \
             --name ar_classification-0.1.0-py3-none-any.whl \
-            --account-name mmadata 
+            --account-name mmadata
 
       - name: Register Model in Azure ML
         run: |
@@ -47,7 +47,7 @@ jobs:
       - name: Register Model in Azure ML
         run: |
             python scripts/register_model.py
-  
+
       - name: Deploy Model to Azure ML Endpoint
         run: |
             python scripts/deploy_model.py

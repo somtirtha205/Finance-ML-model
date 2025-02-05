@@ -9,9 +9,11 @@ from scripts.score import init, run
 MODEL_PATH = "models/model.pkl"
 model = joblib.load(MODEL_PATH)
 
+
 def test_model_loading():
     """Ensure the model is loaded successfully."""
     assert model is not None, "Model failed to load"
+
 
 def test_model_prediction():
     """Test if model returns predictions in expected format."""
@@ -20,6 +22,7 @@ def test_model_prediction():
 
     assert isinstance(prediction, np.ndarray), "Prediction is not an array"
     assert len(prediction) == 1, "Model should return one prediction"
+
 
 def test_scoring_script():
     """Test if the scoring script runs properly."""
