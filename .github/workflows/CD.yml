@@ -46,17 +46,11 @@ jobs:
       - name: Register Model in Azure ML
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          AZURE_SP_ID: ${{ secrets.AZURE_SP_ID }}
-          AZURE_SP_SECRET: ${{ secrets.AZURE_SP_SECRET }}
         run: |
             python scripts/register_model.py
 
       - name: Deploy Model to Azure ML Endpoint
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          AZURE_SP_ID: ${{ secrets.AZURE_SP_ID }}
-          AZURE_SP_SECRET: ${{ secrets.AZURE_SP_SECRET }}
         run: |
             python scripts/deploy_model.py
