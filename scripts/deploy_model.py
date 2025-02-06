@@ -9,15 +9,12 @@ subscription_id = os.getenv("AZURE_SUBSCRIPTION_ID")
 tenant_id = os.getenv("AZURE_Tenant_ID")
 sp_id = os.getenv("AZURE_SP_ID")
 sp_secret = os.getenv("AZURE_SP_SECRET")
-workspace_id = os.getenv("AZURE_WORKSPACE_ID")
 
 sp = ServicePrincipalAuthentication(
     tenant_id=tenant_id, service_principal_id=sp_id, service_principal_password=sp_secret
 )
 
-ws = Workspace.get(
-    name="WorkspaceML", auth=sp, subscription_id=subscription_id, resource_group="ResourceGroupML", id=workspace_id
-)
+ws = Workspace(name="WorkspaceML", auth=sp, subscription_id=subscription_id, resource_group="ResourceGroupML")
 
 # Get the registered model
 model = Model(ws, name="AR_model")
