@@ -12,7 +12,7 @@ ws = Workspace.get(name="WorkspaceML", subscription_id=subscription_id, resource
 model = Model(ws, name="AR_model")
 
 # Define environment
-env = Environment.from_pip_requirements(name="ml-env", file_path="requirements.txt", pip_version="25.0")
+env = Environment.from_conda_specification(name="ml-env", file_path="environment.yml")
 
 # Define inference configuration
 inference_config = InferenceConfig(entry_script="scripts/score.py", environment=env)
