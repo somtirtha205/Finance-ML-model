@@ -7,4 +7,3 @@ dependencies:
   - pip:
       - azureml-defaults
       - joblib
-      - https://mmadata.blob.core.windows.net/custom-package/ar_classification-0.1.0-py3-none-any.whl
