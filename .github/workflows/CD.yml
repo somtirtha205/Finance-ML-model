@@ -1,9 +1,10 @@
 name: Deploy ML Model to Azure ML Studio
 
 on:
-  push:  # Trigger on push to main branch
-    branches:
-      - main  # Trigger on push to main branch
+  workflow_run:
+    workflows: ["Continuous Integration"]
+    types:
+      - completed
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
