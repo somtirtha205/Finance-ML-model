@@ -12,7 +12,7 @@ sp = ServicePrincipalAuthentication(
     tenant_id=tenant_id, service_principal_id=sp_id, service_principal_password=sp_secret
 )
 
-ws = Workspace.get(name="WorkspaceML", auth=sp, subscription_id=subscription_id, resource_group="ResourceGroupML")
+ws = Workspace.get(name="WorkspaceML", subscription_id=subscription_id, resource_group="ResourceGroupML")
 
 model = Model.register(workspace=ws, model_name="AR_model", model_path="./model/ar.pkl", description="Finance ML model")
 
