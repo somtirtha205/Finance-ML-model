@@ -14,7 +14,7 @@ sp = ServicePrincipalAuthentication(
     tenant_id=tenant_id, service_principal_id=sp_id, service_principal_password=sp_secret
 )
 
-ws = Workspace(workspace_name="WorkspaceML", auth=sp, subscription_id=subscription_id, resource_group="ResourceGroupML")
+ws = Workspace.get(name="WorkspaceML", auth=sp, subscription_id=subscription_id, resource_group="ResourceGroupML")
 
 # Get the registered model
 model = Model(ws, name="AR_model")
