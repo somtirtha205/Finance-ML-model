@@ -30,4 +30,9 @@ service = Model.deploy(
 )
 
 service.wait_for_deployment(show_output=True)
+
+# Print the logs
+print(service.get_logs())
+
+# Print the scoring URI
 print(f"Deployment successful! Endpoint: {service.scoring_uri}")
