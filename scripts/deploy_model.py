@@ -14,11 +14,18 @@ model = Model(ws, name="AR_model")
 # Define environment
 env = Environment.from_conda_specification(name="ml-env", file_path="environment.yml")
 
+# Register the environment
+env.register(ws)
+
+# Image Details
+details = env.get_image_details(ws)
+print(details)
+
 # Define inference configuration
 inference_config = InferenceConfig(entry_script="scripts/score.py", environment=env)
 
 # Define deployment configuration
-deployment_config = AciWebservice.deploy_configuration(cpu_cores=2, memory_gb=8)
+deployment_config = AciWebservice.deploy_configuration(cpu_cores=1, memory_gb=4)
 
 # Deploy the model
 service = Model.deploy(
