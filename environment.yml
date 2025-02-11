@@ -15,7 +15,7 @@ dependencies:
       - pre-commit==4.1.0
       - scikit-learn==1.6.1
       - scipy==1.15.1
-      - pydantic==2.10.6
+      - pydantic==2.9.2
       - azureml-core==1.59.0
       - virtualenv==20.29.1
       - setuptools==75.8.0
