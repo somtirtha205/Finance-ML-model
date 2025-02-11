@@ -1,7 +1,11 @@
+import mlflow
+
 from ar_classification import data_load_and_process, generate_feature, model_build_and_evaluate, split_data
 
 
 def build_model():
+    mlflow.autolog()
+
     print("Hello from finance-ml-model!")
 
     df = data_load_and_process.load_data("data/AR-dataset.csv")
