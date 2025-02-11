@@ -11,8 +11,6 @@ from sklearn.preprocessing import StandardScaler
 def train_and_evaluate_model(X_train, X_test, y_train, y_test):
     tscv = TimeSeriesSplit()
 
-    mlflow.autolog()
-
     pipeline1 = make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", random_state=0))
 
     param_grid1 = {

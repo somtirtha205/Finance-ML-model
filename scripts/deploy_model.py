@@ -19,7 +19,9 @@ env.register(ws)
 
 # Image Details
 details = env.get_image_details(ws)
-print(details)
+print(details["ingredients"]["dockerfile"])
+
+print(env.python.conda_dependencies.serialize_to_string())
 
 # Define inference configuration
 inference_config = InferenceConfig(entry_script="scripts/score.py", environment=env)
