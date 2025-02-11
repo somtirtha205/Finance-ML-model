@@ -11,6 +11,8 @@ from sklearn.preprocessing import StandardScaler
 def train_and_evaluate_model(X_train, X_test, y_train, y_test):
     tscv = TimeSeriesSplit()
 
+    mlflow.autolog()
+
     pipeline1 = make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", random_state=0))
 
     param_grid1 = {
@@ -40,6 +42,6 @@ def train_and_evaluate_model(X_train, X_test, y_train, y_test):
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred))
 
-    mlflow.sklearn.save_model(sk_model=model1, path="./model/model.pkl")
+    mlflow.sklearn.save_model(sk_model=model1, path="model")
 
     return model1
