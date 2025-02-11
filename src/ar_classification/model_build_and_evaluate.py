@@ -42,6 +42,6 @@ def train_and_evaluate_model(X_train, X_test, y_train, y_test):
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred))
 
-    mlflow.sklearn.save_model(sk_model=model1, path="model")
+    mlflow.sklearn.save_model(sk_model=model1, path="model/model.pkl")
 
     return model1
