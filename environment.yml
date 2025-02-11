@@ -19,3 +19,4 @@ dependencies:
       - azureml-core==1.59.0
       - virtualenv==20.29.1
       - setuptools==75.8.0
+      - azureml-inference-server-http==1.4.0
