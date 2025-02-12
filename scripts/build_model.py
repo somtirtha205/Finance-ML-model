@@ -21,6 +21,6 @@ def build_model():
     print(model1.best_params_)
 
 
-mlflow.autolog()
+mlflow.sklearn.autolog()
 
 build_model()
