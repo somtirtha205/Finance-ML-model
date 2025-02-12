@@ -1,5 +1,3 @@
-import mlflow
-
 from ar_classification import data_load_and_process, generate_feature, model_build_and_evaluate, split_data
 
 
@@ -20,7 +18,5 @@ def build_model():
 
     print(model1.best_params_)
 
-
-mlflow.sklearn.autolog()
 
 build_model()
