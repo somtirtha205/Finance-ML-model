@@ -28,7 +28,7 @@ print("\n")
 inference_config = InferenceConfig(entry_script="scripts/score.py", environment=env)
 
 # Define deployment configuration
-deployment_config = AciWebservice.deploy_configuration(cpu_cores=2, memory_gb=8)
+deployment_config = AciWebservice.deploy_configuration(cpu_cores=1, memory_gb=4)
 
 # Deploy the model
 service = Model.deploy(
