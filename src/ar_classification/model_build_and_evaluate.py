@@ -1,4 +1,4 @@
-import mlflow
+import joblib
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -40,6 +40,7 @@ def train_and_evaluate_model(X_train, X_test, y_train, y_test):
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred))
 
-    mlflow.sklearn.save_model(sk_model=model1, path="model.pkl")
+    model_filename = "model/ar.pkl"
+    joblib.dump(model1, model_filename)
 
     return model1
