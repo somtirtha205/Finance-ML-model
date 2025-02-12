@@ -1,7 +1,6 @@
 import os
 
 import joblib
-import mlflow
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -25,29 +24,26 @@ def train_and_evaluate_model(X_train, X_test, y_train, y_test):
         pipeline1, param_grid1, cv=tscv, n_jobs=5, scoring="f1_micro", return_train_score=True, verbose=3
     )
 
-    with mlflow.start_run():
-        mlflow.sklearn.autolog(silent=True)
+    model1 = search1.fit(X_train, y_train)
 
-        model1 = search1.fit(X_train, y_train)
+    y_pred = model1.predict(X_test)
 
-        y_pred = model1.predict(X_test)
+    print("F1 Score   = {:.3f}".format(f1_score(y_test, y_pred, average="micro")))
 
-        print("F1 Score   = {:.3f}".format(f1_score(y_test, y_pred, average="micro")))
+    print("\nConfusion Matrix:")
+    unique_label = np.unique([y_test, y_pred])
+    cm = pd.DataFrame(
+        confusion_matrix(y_test, y_pred, labels=unique_label),
+        index=["true:{:}".format(x) for x in unique_label],
+        columns=["pred:{:}".format(x) for x in unique_label],
+    )
+    print(cm)
 
-        print("\nConfusion Matrix:")
-        unique_label = np.unique([y_test, y_pred])
-        cm = pd.DataFrame(
-            confusion_matrix(y_test, y_pred, labels=unique_label),
-            index=["true:{:}".format(x) for x in unique_label],
-            columns=["pred:{:}".format(x) for x in unique_label],
-        )
-        print(cm)
+    print("\nClassification Report:")
+    print(classification_report(y_test, y_pred))
 
-        print("\nClassification Report:")
-        print(classification_report(y_test, y_pred))
+    os.makedirs("model", exist_ok=True)
+    model_filename = "model/ar.pkl"
+    joblib.dump(model1, model_filename)
 
-        os.makedirs("model", exist_ok=True)
-        model_filename = "model/ar.pkl"
-        joblib.dump(model1, model_filename)
-
-        return model1
+    return model1
