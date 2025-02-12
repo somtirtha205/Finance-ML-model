@@ -1,6 +1,5 @@
 import os
 
-import mlflow
 from azureml.core import Environment, Model, Workspace
 from azureml.core.model import InferenceConfig
 from azureml.core.webservice import AciWebservice
@@ -47,7 +46,3 @@ print(service.get_logs())
 
 # Print the scoring URI
 print(f"Deployment successful! Endpoint: {service.scoring_uri}")
-
-# Log the deployment details to MLflow
-mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-mlflow.azureml.log_model(service, artifact_path="model")
