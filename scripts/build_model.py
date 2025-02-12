@@ -4,8 +4,6 @@ from ar_classification import data_load_and_process, generate_feature, model_bui
 
 
 def build_model():
-    mlflow.autolog()
-
     print("Hello from finance-ml-model!")
 
     df = data_load_and_process.load_data("data/AR-dataset.csv")
@@ -22,5 +20,7 @@ def build_model():
 
     print(model1.best_params_)
 
+
+mlflow.autolog()
 
 build_model()
