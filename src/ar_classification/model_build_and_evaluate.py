@@ -40,7 +40,7 @@ def train_and_evaluate_model(X_train, X_test, y_train, y_test):
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred))
 
-    model_filename = "model/ar.pkl"
+    model_filename = "ar.pkl"
     joblib.dump(model1, model_filename)
 
     return model1
