@@ -12,21 +12,21 @@ from sklearn.preprocessing import StandardScaler
 
 
 def train_and_evaluate_model(X_train, X_test, y_train, y_test):
+    tscv = TimeSeriesSplit()
+
+    pipeline1 = make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", random_state=0))
+
+    param_grid1 = {
+        "standardscaler__with_mean": [True, False],
+        "logisticregression__C": [0.1, 0.5, 1],
+    }
+
+    search1 = GridSearchCV(
+        pipeline1, param_grid1, cv=tscv, n_jobs=5, scoring="f1_micro", return_train_score=True, verbose=3
+    )
+
     with mlflow.start_run():
         mlflow.sklearn.autolog(silent=True)
-
-        tscv = TimeSeriesSplit()
-
-        pipeline1 = make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", random_state=0))
-
-        param_grid1 = {
-            "standardscaler__with_mean": [True, False],
-            "logisticregression__C": [0.1, 0.5, 1],
-        }
-
-        search1 = GridSearchCV(
-            pipeline1, param_grid1, cv=tscv, n_jobs=5, scoring="f1_micro", return_train_score=True, verbose=3
-        )
 
         model1 = search1.fit(X_train, y_train)
 
