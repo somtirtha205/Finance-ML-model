@@ -1,6 +1,7 @@
 import os
 
 import joblib
+import mlflow
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -11,39 +12,42 @@ from sklearn.preprocessing import StandardScaler
 
 
 def train_and_evaluate_model(X_train, X_test, y_train, y_test):
-    tscv = TimeSeriesSplit()
+    with mlflow.start_run():
+        mlflow.sklearn.autolog(silent=True)
 
-    pipeline1 = make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", random_state=0))
+        tscv = TimeSeriesSplit()
 
-    param_grid1 = {
-        "standardscaler__with_mean": [True, False],
-        "logisticregression__C": [0.1, 0.5, 1],
-    }
+        pipeline1 = make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", random_state=0))
 
-    search1 = GridSearchCV(
-        pipeline1, param_grid1, cv=tscv, n_jobs=5, scoring="f1_micro", return_train_score=True, verbose=3
-    )
+        param_grid1 = {
+            "standardscaler__with_mean": [True, False],
+            "logisticregression__C": [0.1, 0.5, 1],
+        }
 
-    model1 = search1.fit(X_train, y_train)
+        search1 = GridSearchCV(
+            pipeline1, param_grid1, cv=tscv, n_jobs=5, scoring="f1_micro", return_train_score=True, verbose=3
+        )
 
-    y_pred = model1.predict(X_test)
+        model1 = search1.fit(X_train, y_train)
 
-    print("F1 Score   = {:.3f}".format(f1_score(y_test, y_pred, average="micro")))
+        y_pred = model1.predict(X_test)
 
-    print("\nConfusion Matrix:")
-    unique_label = np.unique([y_test, y_pred])
-    cm = pd.DataFrame(
-        confusion_matrix(y_test, y_pred, labels=unique_label),
-        index=["true:{:}".format(x) for x in unique_label],
-        columns=["pred:{:}".format(x) for x in unique_label],
-    )
-    print(cm)
+        print("F1 Score   = {:.3f}".format(f1_score(y_test, y_pred, average="micro")))
 
-    print("\nClassification Report:")
-    print(classification_report(y_test, y_pred))
+        print("\nConfusion Matrix:")
+        unique_label = np.unique([y_test, y_pred])
+        cm = pd.DataFrame(
+            confusion_matrix(y_test, y_pred, labels=unique_label),
+            index=["true:{:}".format(x) for x in unique_label],
+            columns=["pred:{:}".format(x) for x in unique_label],
+        )
+        print(cm)
 
-    os.makedirs("model", exist_ok=True)
-    model_filename = "model/ar.pkl"
-    joblib.dump(model1, model_filename)
+        print("\nClassification Report:")
+        print(classification_report(y_test, y_pred))
 
-    return model1
+        os.makedirs("model", exist_ok=True)
+        model_filename = "model/ar.pkl"
+        joblib.dump(model1, model_filename)
+
+        return model1
