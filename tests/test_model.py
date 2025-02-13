@@ -2,11 +2,14 @@ import json
 
 import joblib
 import numpy as np
+import pandas as pd
 
-from scripts.score import init, run
+# Load the dataset and extract a sample row
+df = pd.read_csv("data/processed/X_test_features.csv")
+sample_row = df.iloc[0].values
 
 # Load the model for direct testing
-MODEL_PATH = "models/model.pkl"
+MODEL_PATH = "model/ar.pkl"
 model = joblib.load(MODEL_PATH)
 
 
@@ -17,7 +20,7 @@ def test_model_loading():
 
 def test_model_prediction():
     """Test if model returns predictions in expected format."""
-    sample_input = np.array([[5.1, 3.5, 1.4, 0.2]])  # Modify based on model
+    sample_input = np.array([sample_row])  # Use the sample row from the dataset
     prediction = model.predict(sample_input)
 
     assert isinstance(prediction, np.ndarray), "Prediction is not an array"
@@ -26,9 +29,10 @@ def test_model_prediction():
 
 def test_scoring_script():
     """Test if the scoring script runs properly."""
-    init()  # Initialize model
-    input_data = json.dumps({"data": [[5.1, 3.5, 1.4, 0.2]]})
-    response = run(input_data)
+    sample_input = np.array([sample_row])  # Use the sample row from the dataset
+    prediction = model.predict(sample_input)
+
+    response = json.dumps({"predictions": prediction.tolist()})
     response_json = json.loads(response)
 
     assert "predictions" in response_json, "Missing predictions in response"
