@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 
 import joblib
 import numpy as np
@@ -29,11 +28,7 @@ def init():
     except Exception as e:
         logger.error(f"Error loading model: {str(e)}")
     finally:
-        current_dir = os.getcwd()
-        logger.info(f"Current directory: {current_dir}")
-        model_path = os.path.join(current_dir, "model", "ar.pkl")
-        model = joblib.load(model_path)
-        logger.info(f"Model loaded successfully from {model_path}")
+        pass
 
 
 def run(data):
