@@ -16,7 +16,8 @@ dependencies = ["cloudpickle==3.1.1",
                 "scipy==1.15.1",
                 "pydantic==2.9.2",
                 "azureml-core==1.59.0",
-                "virtualenv==20.29.1"]
+                "virtualenv==20.29.1",
+                "pytest==8.3.4"]
 
 [project.optional-dependencies]
 dev = ["ipykernel>=6.29.5, <7",
