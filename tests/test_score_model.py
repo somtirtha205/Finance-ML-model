@@ -20,6 +20,7 @@ def load_model():
     print(f"Model loaded successfully from {model_path}")
     return model
 
+
 @pytest.fixture
 def sample_data():
     num = np.random.randint(0, 493)
@@ -27,8 +28,8 @@ def sample_data():
     data = df.iloc[num]
     return data.to_json(orient="index")
 
-def test_run(load_model,sample_data):
 
+def test_run(load_model, sample_data):
     model = load_model
 
     input_dict = json.loads(sample_data)
@@ -45,6 +46,6 @@ def test_run(load_model,sample_data):
     assert "predictions" in result_dict, "Result should contain 'predictions'"
     assert "error" not in result_dict, "Result should not contain 'error'"
 
+
 if __name__ == "__main__":
     pytest.main()
-
