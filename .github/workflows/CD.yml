@@ -42,16 +42,16 @@ jobs:
 
       - name: Build Model in Azure ML
         run: |
-            python scripts/build_model.py
+            python scripts/ar_model/build_model.py
 
       - name: Register Model in Azure ML
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         run: |
-            python scripts/register_model.py
+            python scripts/ar_model/register_model.py
 
       - name: Deploy Model to Azure ML Endpoint
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         run: |
-            python scripts/deploy_model.py
+            python scripts/ar_model/deploy_model.py
