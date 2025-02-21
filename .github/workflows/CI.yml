@@ -36,3 +36,9 @@ jobs:
         run: |
           uv pip install pre-commit
           uv run pre-commit run --all-files
+
+      # Run Tests
+      - name: Run tests with pytest
+        run: |
+          uv pip install pytest
+          pytest --maxfail=1 --disable-warnings -q

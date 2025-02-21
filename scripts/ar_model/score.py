@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 
 import joblib
 import numpy as np
@@ -27,14 +28,20 @@ def init():
         print("Model loaded successfully!")
     except Exception as e:
         logger.error(f"Error loading model: {str(e)}")
-        raise
+    finally:
+        current_dir = os.getcwd()
+        logger.info(f"Current directory: {current_dir}")
+        model_path = os.path.join(current_dir, "model", "ar.pkl")
+        model = joblib.load(model_path)
+        logger.info(f"Model loaded successfully from {model_path}")
 
 
 def run(data):
     """Run the model on the input data."""
     try:
-        # Convert input JSON into numpy array
-        input_data = np.array(json.loads(data)["data"])
+        # Convert input JSON into array
+        input_dict = json.loads(data)
+        input_data = np.array(list(input_dict.values())).reshape(1, -1)
 
         # Make prediction
         result = model.predict(input_data)
