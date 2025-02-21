@@ -29,7 +29,7 @@ jobs:
 
       # Setup Dependencies
       - name: Install the dependencies
-        run: uv sync
+        run: uv pip install -r requirements.txt
 
       # Pre-Commit Checks
       - name: Run pre-commit checks
@@ -41,4 +41,4 @@ jobs:
       - name: Run tests with pytest
         run: |
           uv pip install pytest
-          uv run pytest --maxfail=1 --disable-warnings -q
+          pytest --maxfail=1 --disable-warnings -q

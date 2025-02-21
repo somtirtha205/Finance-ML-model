@@ -1,10 +1,6 @@
 name: Deploy ML Model to Azure ML Studio
 
 on:
-  workflow_run:
-    workflows: ["Continuous Integration"]
-    types:
-      - completed
   workflow_dispatch:  # Allow manual trigger
 
 jobs:

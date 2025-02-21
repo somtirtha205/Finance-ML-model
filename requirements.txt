@@ -12,3 +12,4 @@ pydantic==2.9.2
 azureml-core==1.59.0
 virtualenv==20.29.1
 setuptools==75.8.0
+pytest==8.3.4
