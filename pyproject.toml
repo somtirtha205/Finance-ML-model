@@ -28,8 +28,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where =["src"]
-include = ["ar_classification*"]
+where = ["src", "scripts"]
 
 [tool.ruff]
 line-length = 120

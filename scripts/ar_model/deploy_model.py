@@ -25,7 +25,7 @@ print(env.python.conda_dependencies.serialize_to_string())
 print("\n")
 
 # Define inference configuration
-inference_config = InferenceConfig(entry_script="scripts/score.py", environment=env)
+inference_config = InferenceConfig(entry_script="scripts/ar_model/score.py", environment=env)
 
 # Define deployment configuration
 deployment_config = AciWebservice.deploy_configuration(cpu_cores=1, memory_gb=4)

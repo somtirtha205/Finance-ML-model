@@ -28,7 +28,7 @@ def train_and_evaluate_model(X_train, X_test, y_train, y_test):
 
     y_pred = model1.predict(X_test)
 
-    print("F1 Score   = {:.3f}".format(f1_score(y_test, y_pred, average="micro")))
+    print("F1 Score = {:.3f}".format(f1_score(y_test, y_pred, average="micro")))
 
     print("\nConfusion Matrix:")
     unique_label = np.unique([y_test, y_pred])
